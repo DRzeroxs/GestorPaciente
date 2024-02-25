@@ -1,0 +1,70 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.Medicos;
+@model SaveMedicoViewModel
+@{
+    ViewData["Title"] = "Editar Medico";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h4>Editar Medico @Model.Name @Model.LastName</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Medico" asp-action="EditarMedico" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido: </label>
+                            <input type="text" asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label">Telefono: </label>
+                            <input type="text" asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Cedula" class="form-label">Cedula: </label>
+                            <input type="text" asp-for="Cedula" class="form-control" />
+                            <span asp-validation-for="Cedula" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email: </label>
+                            <input type="text" asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label">Seleccione un archivo:</label>
+
+                            <input asp-for="File" class="form-control" />
+
+                            <span asp-validation-for="File" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-warning d-block mx-auto"><i class="bi bi-pencil-fill"></i>Editar</button>
+                        </div>
+
+                    </form>
+                    <a asp-controller="Medico" asp-action="Index">Volver</a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

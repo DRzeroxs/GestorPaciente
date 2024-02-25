@@ -1,0 +1,34 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.PruebasLaboratorio;
+@model SavePruebaLaboratorioViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Editar Prueba de Laboratorio";
+}
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Editar Prueba de Laboratorio</strong></h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditarPruebaLaboratorio" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Nombre: </label>
+                        <input asp-for="Name" class="form-control"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-warning d-block mx-auto"><i class="bi bi-pensil-fill"></i>Editar</button>
+                    </div>
+
+                </form>
+
+                <a asp-controller="PruebaLaboratorio" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

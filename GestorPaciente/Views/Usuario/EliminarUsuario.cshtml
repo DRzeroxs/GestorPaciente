@@ -1,0 +1,61 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.Usuario;
+@model SaveUsuarioViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Seguro que desea eliminar este usuario</strong></h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="EliminarUsuario" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Nombre: </label>
+                        <input asp-for="Name" class="form-control" readonly />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="LastName" class="form-label">Nombre de usuario: </label>
+                        <input asp-for="LastName" class="form-control" readonly />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label">Nombre de usuario: </label>
+                        <input asp-for="UserName" class="form-control" readonly />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">Correo: </label>
+                        <input asp-for="Email" class="form-control" readonly/>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Admin" class="form-label">Rol: </label>
+                        <select asp-for="Admin" class="form-control" readonly>
+                            <option value="true">Administrador</option>
+                            <option value="false">Asistente</option>
+                        </select>
+                        <span asp-validation-for="Admin" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger d-block mx-auto"><i class="bi bi-eraser-fill"></i>Editar</button>
+                    </div>
+
+                </form>
+
+                <a asp-controller="Usuario" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

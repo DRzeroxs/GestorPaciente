@@ -1,0 +1,85 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.Citas;
+@model SaveCitaViewModel
+@{
+    ViewData["Title"] = "Agregar Cita";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                @if (Model.Pacientes != null && Model.Medicos != null)
+                {
+                    <div class="card-header bg-dark text-light">
+                        <h4>Agregar Cita</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <form method="post" asp-controller="Cita" asp-action="AgregarCita" enctype="multipart/form-data">
+
+                            <div class="mb-3">
+                                <label asp-for="PacienteId" class="form-label">Paciente: </label>
+                                <select asp-for="PacienteId" asp-items="@(new SelectList(Model.Pacientes,"Id","Name","LastName"))" class="form-select">
+                                    <option value="0">Seleccione un Paciente</option>
+
+                                </select>
+                                <span asp-validation-for="PacienteId" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="MedicoId" class="form-label">Medicos: </label>
+                                <select asp-for="MedicoId" asp-items="@(new SelectList(Model.Medicos,"Id","Name","LastName"))" class="form-select">
+                                    <option value="0">Seleccione un Medico</option>
+
+                                </select>
+                                <span asp-validation-for="MedicoId" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="cause" class="form-label">Causa: </label>
+                                <textarea asp-for="cause" class="form-control"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Date" class="form-label">Fecha de nacimiento: (DD/MM/AAAA)</label>
+                                <input type="date" asp-for="Date" class="form-control" />
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Hour" class="form-label">Hora: </label>
+                                <input type="time" asp-for="Hour" class="form-control" />
+                                <span asp-validation-for="Hour" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary d-block mx-auto"><i class="bi bi-plus-circle-fill"></i>Crear Cita</button>
+                            </div>
+
+                        </form>
+                        <a asp-controller="Cita" asp-action="Index">Volver</a>
+
+                    </div>
+                }
+                else
+                {
+                    <ul class="mb-3">
+                        @if (Model.Pacientes == null)
+                        {
+                            <li>No hay paciente registrados</li>
+                        }
+                        @if (Model.Medicos == null)
+                        {
+                            <li>No hay Medicos registrados</li>
+                        }
+                    </ul>
+
+                    <a asp-controller="Cita" asp-action="Index">Volver</a>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+

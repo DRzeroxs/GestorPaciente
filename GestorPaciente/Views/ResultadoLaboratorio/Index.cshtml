@@ -1,0 +1,89 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.ResultadosLaboratorio;
+@model List<ResultadoLaboratorioViewModel>;
+@{
+    Layout = "_AsistentLayout";
+    ViewData["Title"] = "Resultados";
+    
+}
+
+<div class="row mb-3">
+    <div class="col-md-6 offset-md-6">
+        <form id="searchForm" form method="post" asp-controller="ResultadoLaboratorio" asp-action="FiltrarCedula">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchInput" placeholder="Buscar por cédula" name="cedula">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="searchButton">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Lista de Resultados</strong></h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        <table class="table table-bordered" id="tblcitas" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Cedula</th>
+                                    <th>Prueba</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="col-2">@Html.DisplayFor(m => item.Paciente.Name) @Html.DisplayFor(m => item.Paciente.LastName)</td>
+                                        <td class="col-2">@Html.DisplayFor(m => item.Paciente.Cedula)</td>
+                                        <td class="col-1">@Html.DisplayFor(m => item.PruebaLaboratorio.Name)</td>
+                                        <td class="col-1">
+                                            @if (item.Pending)
+                                            {
+                                                <text>Pendiente</text>
+                                            }
+                                            @if (!item.Pending)
+                                            {
+                                                <text>Completada</text>
+                                            }
+                                        </td>
+                                        <td class="col-2 align-content-center">
+                                            @if (item.Pending)
+                                            {
+                                                <a class="btn btn-warning btn-sm" asp-controller="ResultadoLaboratorio" asp-action="CompletarResultadoLaboratorio" asp-route-id="@item.Id">
+                                                    <i class="bi bi-check-circle-fill"></i> Completar
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-success btn-sm" asp-controller="ResultadoLaboratorio" asp-action="VerResultadoLaboratorio" asp-route-id="@item.Id">
+                                                    <i class="bi bi-eraser-fill"></i> Ver resultado
+                                                </a>
+                                            }
+
+                                        </td>
+                                    </tr>
+                                   
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No hay pruebas pendientes</p>
+                    }
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

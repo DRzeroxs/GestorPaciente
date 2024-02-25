@@ -1,0 +1,61 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.PruebasLaboratorio;
+@model List<PruebaLaboratorioViewModel>;
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Pruebas de Laboratorio";
+}
+
+<div class="row mb-3">
+    <div class="col-3 offset-9">
+        <a asp-action="AgregarPruebaLaboratorio" asp-controller="PruebaLaboratorio" class="btn btn-outline-secondary d-block mx-auto">
+            <i class="bi bi-file-plus-fill"></i> Agregar Prueba de laboratorio
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Lista de Pruebas de laboratorio</strong></h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        <table class="table table-bordered" id="tblUsuarios" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Aciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="col-4">@Html.DisplayFor(m => item.Id)</td>
+                                        <td class="col-4">@Html.DisplayFor(m => item.Name)</td>
+                                        <td class="col-4">
+                                            <a class="btn btn-warning btn-sm" asp-action="EditarPruebaLaboratorio" asp-route-id="@item.Id">
+                                                <i class="bi bi-pencil-fill"></i> Editar
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" asp-action="EliminarPruebaLaboratorio" asp-route-id="@item.Id">
+                                                <i class="bi bi-eraser-fill"></i> Eliminar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No hay Registros</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

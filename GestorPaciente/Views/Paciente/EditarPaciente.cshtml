@@ -1,0 +1,97 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.Paciente;
+@model SavePacienteViewModel
+@{
+    ViewData["Title"] = "Paciente Medico";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h4>Editar Paciente: @Model.Name @Model.LastName</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Paciente" asp-action="EditarPaciente" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido: </label>
+                            <input type="text" asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <ul style="list-style-type: none; padding: 0; margin: 0;">
+                                <li class="mb-1">
+                                    <label>
+                                        <input type="checkbox" asp-for="Smoker" />
+                                        Fumador
+                                    </label>
+                                    <span asp-validation-for="Smoker" class="text-danger"></span>
+                                </li>
+                                <li class="mb-1">
+                                    <label>
+                                        <input type="checkbox" asp-for="Allergies" />
+                                        Alergias
+                                    </label>
+                                    <span asp-validation-for="Allergies" class="text-danger"></span>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label">Telefono: </label>
+                            <input type="text" asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Cedula" class="form-label">Cedula: </label>
+                            <input type="text" asp-for="Cedula" class="form-control" />
+                            <span asp-validation-for="Cedula" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Direction" class="form-label">Direccion: </label>
+                            <input type="text" asp-for="Direction" class="form-control" />
+                            <span asp-validation-for="Direction" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BirhtDate" class="form-label">Fecha de nacimiento: (DD/MM/AAAA)</label>
+                            <input type="date" asp-for="BirhtDate" class="form-control" />
+                            <span asp-validation-for="BirhtDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label">Seleccione un archivo:</label>
+
+                            <input asp-for="File" class="form-control" />
+
+                            <span asp-validation-for="File" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-warning d-block mx-auto"><i class="bi bi-pencil-fill"></i>Editar</button>
+                        </div>
+
+                    </form>
+                    <a asp-controller="Paciente" asp-action="Index">Volver</a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

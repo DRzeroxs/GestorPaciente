@@ -1,0 +1,52 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.ResultadosLaboratorio;
+@model SaveResultadoLaboratorioViewModel;
+@{
+    Layout = "_AsistentLayout";
+    ViewData["Title"] = "Ver Resultado";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                @if (Model != null)
+                {
+                    <div class="card-header bg-dark text-light">
+                        <h4>Ver Resultado</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <form method="post" asp-controller="ResultadoLaboratorio" asp-action="CompletarResultadoLaboratorio">
+
+                            <input type="hidden" asp-for=@Model.Id />
+
+                            <input type="hidden" asp-for=@Model.CitaId />
+
+                            <input type="hidden" asp-for=@Model.PruebaLaboratorioId />
+
+                            <div class="mb-3">
+                                <label asp-for="Result" class="form-label">Resultado: </label>
+                                <textarea asp-for="Result" class="form-control" readonly></textarea>
+                                <span asp-validation-for="Result" class="text-danger"></span>
+                            </div>
+
+                            <input type="hidden" asp-for="Pending" value=false />
+                        </form>
+
+                        <a asp-controller="Cita" asp-action="Index">Volver</a>
+
+                    </div>
+                }
+                else
+                {
+                    <p>No se encontro Prueba</p>
+
+                    <a asp-controller="Cita" asp-action="Index">Volver</a>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+

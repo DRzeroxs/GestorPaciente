@@ -1,0 +1,98 @@
+﻿@using GestorPaciente.Core.Application.ViewModels.Citas;
+@model List<CitaViewModel>;
+@{
+    Layout = "_AsistentLayout";
+    ViewData["Title"] = "Citas";
+}
+
+<div class="row mb-3">
+    <div class="col-3 offset-9">
+        <a asp-action="AgregarCita" asp-controller="Cita" class="btn btn-outline-secondary d-block mx-auto">
+            <i class="bi bi-file-plus-fill"></i> Agregar Cita
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Lista de Citas</strong></h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        <table class="table table-bordered" id="tblcitas" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Medico</th>
+                                    <th>Fecha</th>
+                                    <th>Causa</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="col-2">@Html.DisplayFor(m => item.Paciente.Name) @Html.DisplayFor(m => item.Paciente.LastName)</td>
+                                        <td class="col-2">@Html.DisplayFor(m => item.Medico.Name) @Html.DisplayFor(m => item.Medico.LastName)</td>
+                                        <td class="col-1">@Html.DisplayFor(m => item.Date)  @Html.DisplayFor(m => item.Hour)</td>
+                                        <td class="col-4">@Html.DisplayFor(m => item.cause)</td>
+                                        
+                                        <td class="col-1">
+                                            @if (item.Complete)
+                                            {
+                                                <text>Completada</text>
+                                            }
+                                            @if(item.PendingQuery)
+                                            {
+                                                <text>Sin Asignar</text>
+                                            }
+                                            @if(item.PendingResult)
+                                            {
+                                                <text>Esperando Resultados</text>
+                                            }
+                                        </td>
+                                        <td class="col-2 align-content-center">
+                                            @if (item.PendingQuery)
+                                            {
+                                                <a class="btn btn-primary btn-sm" asp-controller="Cita" asp-action="SeleccionarPruebas" asp-route-id="@item.Id">
+                                                    <i class="bi bi-file-plus-fill"></i> Agregar Prueba
+                                                </a>
+                                            }
+                                            @if (item.PendingResult)
+                                            {
+                                                <a class="btn btn-warning btn-sm" asp-controller="ResultadoLaboratorio" asp-action="VerResultadoCita" asp-route-id="@item.Id">
+                                                    <i class="bi bi-hourglass-bottom"></i> Ver Pruebas
+                                                </a>
+                                            }
+                                            @if (item.Complete)
+                                            {
+                                                <a class="btn btn-success btn-sm" asp-controller="ResultadoLaboratorio" asp-action="VerResultadoCita" asp-route-id="@item.Id">
+                                                    <i class="bi bi-check-circle-fill"></i> Completada
+                                                </a>
+                                            }else{
+                                                <a class="btn btn-danger btn-sm" asp-controller="Cita" asp-action="EliminarCita" asp-route-id="@item.Id">
+                                                    <i class="bi bi-eraser-fill"></i> Eliminar
+                                                </a>
+                                            }
+                                            
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No hay citas programadas</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
